@@ -57,7 +57,6 @@ python zhihuishu_course_automation.py
 | `ENABLE_LLM_ANSWER` | 否 | 是否使用大模型自动答题，默认 `true` |
 | `ANSWER_MODEL` | 否 | 答题模型名称，默认 `qwen3.6-plus` |
 | `ENABLE_REASONING` | 否 | 是否启用推理模式，默认 `false` |
-| `QWEN_TEMPERATURE` | 否 | 生成温度参数，默认 `0.7` |
 
 > API 密钥可前往 [阿里云百炼控制台](https://bailian.console.aliyun.com/) 申请。
 

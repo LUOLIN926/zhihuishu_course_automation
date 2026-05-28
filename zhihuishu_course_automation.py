@@ -225,7 +225,6 @@ async def ai_answer_question(page):
                     "content": prompt
                 }
             ],
-            "temperature": 0.3,
             "extra_body": {"enable_thinking": enable_reasoning},
         }
 

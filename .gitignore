@@ -1,0 +1,25 @@
+# Environments
+.env
+.env.local
+.env.*
+!.env.example
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Screenshots and temp files
+.ocr_screenshots/
+*.png
+*.jpg
+*.jpeg
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

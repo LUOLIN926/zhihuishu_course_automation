@@ -1,0 +1,6 @@
+playwright==1.40.0
+python-dotenv==1.0.0
+httpx==0.25.2
+Pillow==10.1.0
+pytesseract==0.3.10
+opencv-python==4.8.1.78

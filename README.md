@@ -59,7 +59,37 @@ python zhihuishu_course_automation.py
 | `ENABLE_REASONING` | 否 | 是否启用推理模式，默认 `false` |
 | `QWEN_TEMPERATURE` | 否 | 生成温度参数，默认 `0.7` |
 
-> API 密钥可前往 [阿里云百炼控制台](https://bailian.console.aliyun.com/) 申请。所有请求走标准 OpenAI Chat Completions 接口，可将 `DASHSCOPE_BASE_URL` 和 `DASHSCOPE_API_KEY` 替换为其他兼容服务（如 DeepSeek、硅基流动等）。
+> API 密钥可前往 [阿里云百炼控制台](https://bailian.console.aliyun.com/) 申请。
+
+### 切换其他 AI 服务
+
+本工具所有请求走标准 OpenAI Chat Completions 接口，**不限于阿里云通义千问**。只需修改 `DASHSCOPE_BASE_URL`、`DASHSCOPE_API_KEY` 和 `ANSWER_MODEL` 三个变量即可切换到任何兼容 OpenAI 接口的服务商。
+
+**DeepSeek：**
+
+```env
+DASHSCOPE_API_KEY="sk-your-deepseek-key"
+DASHSCOPE_BASE_URL="https://api.deepseek.com/v1"
+ANSWER_MODEL="deepseek-chat"
+```
+
+**硅基流动 (SiliconFlow)：**
+
+```env
+DASHSCOPE_API_KEY="sk-your-siliconflow-key"
+DASHSCOPE_BASE_URL="https://api.siliconflow.cn/v1"
+ANSWER_MODEL="Qwen/Qwen2.5-7B-Instruct"
+```
+
+**OpenAI：**
+
+```env
+DASHSCOPE_API_KEY="sk-your-openai-key"
+DASHSCOPE_BASE_URL="https://api.openai.com/v1"
+ANSWER_MODEL="gpt-4o-mini"
+```
+
+> 任何提供 OpenAI 兼容接口的服务均可接入，只需确保 Base URL 以 `/v1` 结尾、模型名称与服务商一致即可。
 
 ---
 

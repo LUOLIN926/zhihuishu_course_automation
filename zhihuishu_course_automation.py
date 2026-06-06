@@ -391,6 +391,31 @@ async def zhihuishu_automation():
 
             print("已跳转到课程学习页面，正在关闭弹窗...")
 
+            # 检测“学习时间已经结束”温馨提示弹窗
+            logger.info("正在检测是否有“学习时间已经结束”温馨提示弹窗...")
+            try:
+                warm_tip_dialog = page.locator('div.el-dialog[aria-label="温馨提示"]:has-text("学习时间已经结束")').first
+                if await warm_tip_dialog.count() > 0 and await warm_tip_dialog.is_visible():
+                    logger.info("检测到“学习时间已经结束”温馨提示弹窗！")
+                    print("【温馨提示】学习时间已经结束, 观看视频将不再计进度")
+                    
+                    # 尝试点击“我知道了”按钮
+                    know_btn = warm_tip_dialog.locator('button:has-text("我知道了")').first
+                    if await know_btn.count() > 0 and await know_btn.is_visible():
+                        await know_btn.click(timeout=3000)
+                        logger.info("已点击“我知道了”按钮关闭弹窗")
+                    else:
+                        # 如果没找到“我知道了”按钮，尝试点击右上角关闭按钮
+                        close_btn = warm_tip_dialog.locator('button[aria-label="Close"]').first
+                        if await close_btn.count() > 0 and await close_btn.is_visible():
+                            await close_btn.click(timeout=3000)
+                            logger.info("已点击右上角关闭按钮")
+                    await asyncio.sleep(1)
+                else:
+                    logger.info("未检测到“学习时间已经结束”温馨提示弹窗，继续执行")
+            except Exception as warm_tip_error:
+                logger.info(f"处理“学习时间已经结束”温馨提示弹窗异常，继续执行: {warm_tip_error}")
+
             # 处理关闭按钮0（公众号课程提醒弹窗)
             
             logger.info("正在查找关闭按钮0(公众号课程提醒弹窗)...")

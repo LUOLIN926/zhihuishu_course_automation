@@ -697,8 +697,13 @@ async def zhihuishu_automation():
             logger.error(f"执行过程中出现错误: {e}")
             import traceback
             traceback.print_exc()
+            print("【发生错误】脚本已停止运行。浏览器保持打开状态以供排查原因。您可以手动接管，或按 Ctrl+C 退出程序。")
+            try:
+                await asyncio.sleep(3600)
+            except asyncio.CancelledError:
+                pass
         finally:
-            logger.info("浏览器保持打开状态...")
+            logger.info("Playwright 浏览器上下文已关闭")
 
 if __name__ == "__main__":
     asyncio.run(zhihuishu_automation())

@@ -49,8 +49,8 @@ python zhihuishu_course_automation.py
 
 | 变量 | 必填 | 说明 |
 | --- | --- | --- |
-| `USERNAME` | 是 | 智慧树登录手机号 |
-| `PASSWORD` | 是 | 智慧树登录密码 |
+| `ZHIHUISHU_USERNAME` | 是 | 智慧树登录手机号 |
+| `ZHIHUISHU_PASSWORD` | 是 | 智慧树登录密码 |
 | `COURSE_NAME` | 是 | 要学习的课程完整名称 |
 | `DASHSCOPE_API_KEY` | 是 | 阿里云百炼 API 密钥 |
 | `DASHSCOPE_BASE_URL` | 否 | API 端点，默认 `https://dashscope.aliyuncs.com/compatible-mode/v1` |

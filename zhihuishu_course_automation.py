@@ -1,7 +1,7 @@
 import asyncio
 from playwright.async_api import async_playwright
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv, dotenv_values
 load_dotenv()
 import logging
 import httpx
@@ -288,10 +288,28 @@ async def ai_answer_question(page):
 
 async def zhihuishu_automation():
     """刷课主流程：登录、进入课程、播放未完成视频并处理答题弹窗。"""
-    env_course_name = os.getenv("COURSE_NAME")
-    env_username = os.getenv("USERNAME")
-    env_password = os.getenv("PASSWORD")
+    # 优先从 .env 直接读取配置，避免与系统环境变量（如 Windows 上的 USERNAME）冲突
+    config = dotenv_values(".env") if os.path.exists(".env") else {}
+    env_course_name = config.get("COURSE_NAME") or os.getenv("COURSE_NAME")
+    env_password = config.get("PASSWORD") or os.getenv("PASSWORD")
     
+    env_username = config.get("USERNAME") or os.getenv("ZHIHUISHU_USERNAME") or os.getenv("ZH_USERNAME")
+    if not env_username:
+        username_fallback = os.getenv("USERNAME")
+        if username_fallback:
+            # 检查是否为系统内置用户名，若是则忽略，防止在 Windows 上误用系统用户名作为智慧树账号
+            system_user = None
+            try:
+                system_user = os.getlogin()
+            except Exception:
+                try:
+                    import getpass
+                    system_user = getpass.getuser()
+                except Exception:
+                    pass
+            if username_fallback != system_user:
+                env_username = username_fallback
+
     if env_course_name and env_username and env_password:
         course_name = env_course_name
         username = env_username
